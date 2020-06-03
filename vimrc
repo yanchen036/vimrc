@@ -29,19 +29,14 @@ set laststatus=2
 
 set t_Co=256
 
-"colo desert
-colo ron
-
 filetype plugin indent on
 filetype plugin on
 
 syntax on
-" set font
-set guifont=Courier\ New:h16
-" show line number
+set background=dark
+colo solarized
 set number
 " remove bell
-set vb
 
 " ------------------------
 "   form
@@ -50,73 +45,82 @@ set vb
 set tabstop=4
 
 set shiftwidth=4
-
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %=%{strftime(\"%m/%d/%y\ -\ %H:%M\")}\ 
 
 set cmdheight=1
 
 set smarttab
 " replace tab with blacks
 set expandtab
-" turn on doxygen highlight
-let g:load_doxygen_syntax=1
-" turn on c style indent
-set cindent
 
 set autoindent
 
 " text width
 " set textwidth=80
 
-set linebreak
 " set wrap type
 set formatoptions+=mB
 
 set ambiwidth=double
 
 " ------------------------
-"   edit
+"   ctags
 " ------------------------
+set tags=./tags;
+set autochdir
 
-set backspace=indent,eol,start
+" ------------------------
+"   Vundle
+" ------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set whichwrap=b,s,<,>,[,]
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-set mouse=a
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'luochen1990/rainbow'
+Plugin 'preservim/nerdtree'
 
-set mousemodel=popup
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
 
-" ignorecase in search
-set ignorecase
-"highlight cursor
-"set cursorcolumn
-set cursorline
-set novisualbell
-" smart Home
-"function SmartHome()
-"    let curcol = col(".")
-"    if curcol == 1 || curcol > indent(".") + 1
-"        normal ^
-"    else
-"        normal 0
-"    endif
-"    return ""
-"endfunction
-
-" for taglist
-"let Tlist_File_Fold_Auto_Close=1
-"let Tlist_Exit_OnlyWindow=1
-"let Tlist_Auto_Open=1
-"let Tlist_WinWidth=50
-"let Tlist_Max_Tag_Length=50
-"let Tlist_Use_Right_Window=1
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 "
-"let OmniCpp_NamespaceSearch=1
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
-" configure tags$
-"set tags+=~/.vim/tags/sys_include_sys
-"set tags+=~/.vim/tags/sys_include_bits
-"set tags+=~/.vim/tags/sys_include_linux
-"set tags+=~/.vim/tags/sys_include_cpp
-"set tags+=~/.vim/tags/sys_include_boost
-"set tags+=~/.vim/tags/sys_include_openmpi
+" ------------------------
+"   ctrlp
+" ------------------------
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" ------------------------
+"   Taglist
+" ------------------------
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Use_Right_Window=1
+let Tlist_Auto_Open=1
+let Tlist_Process_File_Always=1
+let Tlist_File_Fold_Auto_Close=1
+
+" ------------------------
+"   rainbow
+" ------------------------
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
